@@ -1,0 +1,11 @@
+.library-img {
+  height: 100px;
+  width: 100px;
+}
+
+.library-row {
+  padding: 10px 15px;
+}
+.library-row.row .col-10 {
+  padding-left: 0;
+}

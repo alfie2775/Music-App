@@ -9,6 +9,7 @@ import "../css/musicplayer.css";
 const MusicPlayer = () => {
   const [songs] = useState(SONGS);
   const [currentSongIndex, setcurrentSongIndex] = useState(0);
+  const [mode, setMode] = useState("repeat");
 
   return (
     <div className="container">
@@ -16,6 +17,8 @@ const MusicPlayer = () => {
       <Library songs={songs} />
       <p>This is a test</p>
       <MusicCard
+        mode={mode}
+        setMode={setMode}
         song={songs[currentSongIndex]}
         nextSong={() =>
           setcurrentSongIndex((currentSongIndex + 1) % songs.length)
