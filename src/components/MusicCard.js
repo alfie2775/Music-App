@@ -1,5 +1,9 @@
 import "font-awesome/css/font-awesome.css";
 import { useRef, useState, useEffect } from "react";
+import "../css/musiccard.css";
+import React from "react";
+import "react-dom";
+import ReactTooltip from "react-tooltip";
 
 const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
   const audioRef = useRef(null);
@@ -39,7 +43,13 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
     var s = (n % 60).toString().substring(0, 2);
     if (m < 10) m = "0" + m;
     if (s < 10) s = "0" + s;
-    return m + ":" + s + "  ";
+    return m + ":" + s;
+  };
+
+  const changeMode = () => {
+    if (mode === "repeat") setMode("loop");
+    else if (mode === "loop") setMode("no-repeat");
+    else setMode("repeat");
   };
 
   useEffect(() => {
@@ -48,75 +58,132 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
   }, [isPlaying]);
 
   return (
-    <div className="card">
-      <h5 className="card-title">{song.name}</h5>
-      <img src={song.img} alt={song.name} className="card-img" />
-      <div className="card-body">
-        <audio
-          autoPlay={autoPlay}
-          onEnded={handleEnd}
-          loop={mode === "loop" ? true : false}
-          onTimeUpdate={() => setSongTime(audioRef.current.currentTime)}
-          src={song.src}
-          ref={audioRef}
-        ></audio>
-        <div>
-          <span>{songTime == 0 ? "--:--" : sToM(songTime)}</span>
-          <input
-            ref={timeRef}
-            onInput={(e) => {
-              audioRef.current.currentTime = e.target.value;
-            }}
-            type="range"
-            min={0}
-            value={songTime}
-            max={
-              audioRef.current
+    <div className="row justify-content-center">
+      <div className="card d-flex">
+        <h5 className="card-title text-center mt-2">{song.name}</h5>
+        <img src={song.img} alt={song.name} className="card-img" />
+        <div className="card-body justify-content-center">
+          <audio
+            autoPlay={autoPlay}
+            onEnded={handleEnd}
+            loop={mode === "loop" ? true : false}
+            onTimeUpdate={() => setSongTime(audioRef.current.currentTime)}
+            src={song.src}
+            ref={audioRef}
+          ></audio>
+          <div className="time-stamps">
+            <span className="col-2">
+              {songTime === 0 ? "00:00" : sToM(songTime)}
+            </span>
+            <span className="col-8">
+              <input
+                ref={timeRef}
+                onInput={(e) => {
+                  audioRef.current.currentTime = e.target.value;
+                  console.log(e.target.value);
+                }}
+                type="range"
+                min={0}
+                value={songTime}
+                max={
+                  audioRef.current
+                    ? isNaN(audioRef.current.duration)
+                      ? 0
+                      : audioRef.current.duration
+                    : 0
+                }
+                step="any"
+              />
+            </span>
+            <span className="col-2">
+              {audioRef.current
                 ? isNaN(audioRef.current.duration)
-                  ? 0
-                  : audioRef.current.duration
-                : 0
-            }
-            step="any"
-          />
-          <span>
-            {audioRef.current
-              ? isNaN(audioRef.current.duration)
-                ? "--:--"
-                : sToM(audioRef.current.duration)
-              : "--:--"}
-          </span>
-        </div>
-        <div className="controls">
-          <button className="btn btn" onClick={() => changeSong(prevSong)}>
-            <span className="fa fa-backward"></span>
-          </button>
-          <button className="btn btn-success" onClick={handlePP}>
-            <span
-              ref={pp}
-              className={"fa fa-lg " + (isPlaying ? "fa-pause" : "fa-play")}
-            ></span>
-          </button>
-          <button className="btn btn" onClick={() => changeSong(nextSong)}>
-            <span className="fa fa-forward"></span>
-          </button>
-          <button className="btn">
-            <span
-              className={
-                "fa " + (volume > 0 ? "fa-volume-up" : "fa-volume-down")
-              }
-            ></span>
-            <input
-              style={{ transform: "rotate(270deg) translate(-50%, -50%)" }}
-              type="range"
-              value={volume}
-              min={0}
-              max={1}
-              step={"any"}
-              aria-orientation="vertical"
-              onInput={(e) => handleVolume(e)}
-            />
-          </button>
+                  ? "00:00"
+                  : sToM(audioRef.current.duration)
+                : "00:00"}
+            </span>
+          </div>
+          <div className="controls mt-2 mb-1">
+            <div className="row justify-content-center mb-2">
+              <div className="col-6">
+                <button className="btn" onClick={() => changeSong(prevSong)}>
+                  <span className="fa fa-step-backward"></span>
+                </button>
+                <button
+                  className="ml-2 mr-2 btn btn-success pp"
+                  onClick={handlePP}
+                >
+                  <span
+                    ref={pp}
+                    className={"fa " + (isPlaying ? "fa-pause" : "fa-play")}
+                  ></span>
+                </button>
+
+                <button
+                  className="btn btn"
+                  onClick={() => changeSong(nextSong)}
+                >
+                  <span className="fa fa-step-forward"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-6 d-flex">
+              <button className="btn">
+                <a href={song.src} download={song.name}>
+                  <span className="fa fa-download"></span>
+                </a>
+              </button>
+
+              <div className="drop-down" data-tip data-for="volume">
+                <button className="btn" id="volumeDropDown">
+                  <span
+                    className={
+                      "fa " + (volume > 0 ? "fa-volume-up" : "fa-volume-off")
+                    }
+                  ></span>
+                </button>
+                <input
+                  className="volume-dropdown pt-1"
+                  data-tip
+                  data-for="volume"
+                  type="range"
+                  value={volume}
+                  min={0}
+                  max={1}
+                  step={"any"}
+                  aria-orientation="vertical"
+                  onInput={(e) => handleVolume(e)}
+                />
+              </div>
+              <button
+                className="btn"
+                onClick={changeMode}
+                data-tip
+                data-for="mode"
+              >
+                <span
+                  style={{
+                    transform: "scaleX(-1) rotate(-30deg)",
+                    color: mode === "no-repeat" ? "grey" : "green",
+                  }}
+                  className="fa fa-undo"
+                ></span>
+                <sub style={{ color: "green", fontWeight: "bold" }}>
+                  {mode === "loop" ? " 1" : ""}
+                </sub>
+              </button>
+              <ReactTooltip effect="solid" id="mode" place="bottom">
+                <span style={{ textTransform: "capitalize" }}>
+                  {"on " + mode}
+                </span>
+              </ReactTooltip>
+              <ReactTooltip effect="solid" id="volume">
+                <span>{parseInt(volume * 100) + "%"}</span>
+              </ReactTooltip>
+            </div>
+          </div>
         </div>
       </div>
     </div>

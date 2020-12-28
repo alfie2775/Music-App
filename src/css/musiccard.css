@@ -1,0 +1,35 @@
+.card-img {
+  height: 300px;
+  max-width: 300px;
+  border-radius: 50% !important;
+  margin: auto;
+}
+.btn.ml-2.pp {
+  border-radius: 50%;
+}
+
+.btn:focus {
+  box-shadow: none !important;
+}
+
+.btn:active {
+  color: white !important;
+}
+.drop-down {
+  position: relative;
+}
+.volume-dropdown {
+  display: none;
+  position: absolute;
+  transform: translateX(-30%);
+}
+.drop-down:hover .volume-dropdown {
+  display: block;
+}
+.card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+}
+.fa {
+  color: white !important;
+}

@@ -1,11 +1,27 @@
 .library-img {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
 }
-
+.song-card-title {
+  font-size: 1.5rem;
+}
+.song-card-text {
+  font-size: 1.2rem;
+}
 .library-row {
   padding: 10px 15px;
 }
 .library-row.row .col-10 {
   padding-left: 0;
+}
+.library-container {
+  margin-left: 2%;
+  padding-left: 2%;
+  background: rgba(255, 255, 255, 0.12);
+  height: 80vh;
+  width: 100vw !important;
+  /* transform: translateX(100%); */
+  z-index: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
