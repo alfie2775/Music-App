@@ -11,7 +11,7 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
   const pp = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [songTime, setSongTime] = useState(0);
-  const [autoPlay, setAutoPlay] = useState("off");
+  const [autoPlay, setAutoPlay] = useState(false);
   const [volume, setVolume] = useState(1);
 
   const handlePP = () => {
@@ -27,7 +27,6 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
 
   const changeSong = (func) => {
     func();
-    audioRef.current.load();
   };
 
   const handleEnd = () => {
@@ -58,10 +57,11 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
   }, [isPlaying]);
 
   return (
-    <div className="row justify-content-center">
-      <div className="card d-flex">
-        <h5 className="card-title text-center mt-2">{song.name}</h5>
+    <div className="row justify-content-center" style={{ height: "100%" }}>
+      <div className="card d-flex m-5">
+        <h5 className="card-title text-center mt-3">{song.name}</h5>
         <img src={song.img} alt={song.name} className="card-img" />
+        <h6 className="card-title text-center mt-3">{song.singer}</h6>
         <div className="card-body justify-content-center">
           <audio
             autoPlay={autoPlay}
@@ -72,11 +72,12 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
             ref={audioRef}
           ></audio>
           <div className="time-stamps">
-            <span className="col-2">
+            <span className="col-2 timestamp">
               {songTime === 0 ? "00:00" : sToM(songTime)}
             </span>
             <span className="col-8">
               <input
+                className="time-stamp"
                 ref={timeRef}
                 onInput={(e) => {
                   audioRef.current.currentTime = e.target.value;
@@ -95,7 +96,7 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
                 step="any"
               />
             </span>
-            <span className="col-2">
+            <span className="col-2 timestamp">
               {audioRef.current
                 ? isNaN(audioRef.current.duration)
                   ? "00:00"
@@ -105,14 +106,11 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
           </div>
           <div className="controls mt-2 mb-1">
             <div className="row justify-content-center mb-2">
-              <div className="col-6">
+              <div className="col-7">
                 <button className="btn" onClick={() => changeSong(prevSong)}>
                   <span className="fa fa-step-backward"></span>
                 </button>
-                <button
-                  className="ml-2 mr-2 btn btn-success pp"
-                  onClick={handlePP}
-                >
+                <button className="btn btn-success pp" onClick={handlePP}>
                   <span
                     ref={pp}
                     className={"fa " + (isPlaying ? "fa-pause" : "fa-play")}
@@ -129,7 +127,7 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
             </div>
           </div>
           <div className="row justify-content-center">
-            <div className="col-6 d-flex">
+            <div className="col-7 d-flex">
               <button className="btn">
                 <a href={song.src} download={song.name}>
                   <span className="fa fa-download"></span>
@@ -168,9 +166,11 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
                     transform: "scaleX(-1) rotate(-30deg)",
                     color: mode === "no-repeat" ? "grey" : "green",
                   }}
-                  className="fa fa-undo"
+                  className={
+                    "fa fa-undo " + (mode === "no-repeat" ? "grey-" : "green-")
+                  }
                 ></span>
-                <sub style={{ color: "green", fontWeight: "bold" }}>
+                <sub style={{ color: "lightgreen", fontWeight: "bold" }}>
                   {mode === "loop" ? " 1" : ""}
                 </sub>
               </button>

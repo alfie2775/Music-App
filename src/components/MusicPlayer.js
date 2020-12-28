@@ -31,7 +31,7 @@ const MusicPlayer = () => {
         <Navigation openLibrary={openLibrary} />
       </div>
       <div id="slider" className="slide-" ref={slider}>
-        <div className="mc" ref={slider2}>
+        <div className="mc" ref={mc}>
           <MusicCard
             mode={mode}
             setMode={setMode}
@@ -47,7 +47,18 @@ const MusicPlayer = () => {
           />
         </div>
         <div className="lib slide-" ref={slider2}>
-          <Library songs={songs} selectSong={selectSong} />
+          <button
+            className="btn"
+            onClick={openLibrary}
+            style={{ marginLeft: "2%" }}
+          >
+            <span className="fa fa-close fa-lg"></span>
+          </button>
+          <Library
+            songs={songs}
+            selectSong={selectSong}
+            currentSongIndex={currentSongIndex}
+          />
         </div>
       </div>
     </>

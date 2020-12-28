@@ -1,10 +1,12 @@
 .card-img {
-  height: 300px;
-  max-width: 300px;
+  height: 270px;
+  max-width: 270px;
   border-radius: 50% !important;
   margin: auto;
 }
-.btn.ml-2.pp {
+.btn.pp {
+  margin-left: 10% !important;
+  margin-right: 10% !important;
   border-radius: 50%;
 }
 
@@ -32,4 +34,24 @@
 }
 .fa {
   color: white !important;
+}
+.timestamp {
+  font-family: sans-serif;
+  font-size: 0.8rem;
+}
+.fa {
+  font-size: 1.2rem !important;
+}
+.green- {
+  color: lightgreen !important;
+}
+.grey- {
+  color: rgb(204, 204, 204) !important;
+}
+.loop {
+  font-weight: lighter;
+}
+.drop-down {
+  margin-left: 6% !important;
+  margin-right: 1% !important;
 }

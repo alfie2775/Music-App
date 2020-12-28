@@ -1,3 +1,15 @@
 .navibar {
-  height: 20vh;
+  height: 10vh;
+}
+.brand {
+  font-size: 1.8rem;
+}
+
+button.btn:hover {
+  color: lightgrey !important;
+}
+@media (max-width: 913px) {
+  .brand {
+    font-size: 1.5rem;
+  }
 }

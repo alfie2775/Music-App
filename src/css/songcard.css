@@ -1,0 +1,38 @@
+.library-row:hover,
+.selected-song {
+  background: rgba(255, 255, 255, 0.12);
+}
+.library-img {
+  height: 120px;
+  width: 120px;
+}
+.song-card-title {
+  font-size: 1.4rem;
+}
+.song-card-text {
+  font-size: 1.2rem;
+}
+@media (max-width: 913px) {
+  .song-card-text {
+    font-size: 1rem;
+  }
+  .song-card-title {
+    font-size: 1.2rem;
+  }
+  .list-text {
+    padding-left: 20% !important;
+  }
+  .library-img {
+    height: 100px;
+    width: 100px;
+  }
+}
+@media (max-width: 500px) {
+  .library-img {
+    height: 80px;
+    width: 80px;
+  }
+  .song-card-title {
+    font-size: 1.1rem;
+  }
+}

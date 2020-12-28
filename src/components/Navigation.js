@@ -4,12 +4,20 @@ const Navigation = ({ openLibrary }) => {
     <div className="navibar container">
       <div className="row">
         <div className="col-6">
-          <h1 className="brand">MUSIC PLAYER</h1>
+          <p className="brand mt-2">MUSIC PLAYER</p>
         </div>
-        <div className="col-2 ml-auto">
-          <button className="btn" onClick={openLibrary}>
-            <span className="fa fa-music fa-lg"></span>
-          </button>
+        <div className="col-6 d-flex justify-content-center">
+          <div>
+            <button
+              style={{ color: "white" }}
+              className="btn"
+              onClick={openLibrary}
+            >
+              <span className="fa fa-music fa-lg"></span>
+              <br />
+              <span>Library</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
