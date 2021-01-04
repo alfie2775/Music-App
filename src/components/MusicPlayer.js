@@ -48,6 +48,18 @@ const MusicPlayer = () => {
               setcurrentSongIndex(x);
             }}
           />
+          <div className="alfie">
+            <p>
+              Made by{" "}
+              <a
+                target="_blank"
+                className="link-to-alfie"
+                href="https://tarunalfie.netlify.app"
+              >
+                Alfie
+              </a>
+            </p>
+          </div>
         </div>
         <div className="lib slide-" ref={slider2}>
           <button

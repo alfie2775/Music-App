@@ -4,7 +4,6 @@ import "../css/library.css";
 const Library = (props) => {
   return (
     <div className="library-container">
-      <div className="library"></div>
       <div className="music-list">
         {props.songs.map((song, idx) => (
           <SongCard
