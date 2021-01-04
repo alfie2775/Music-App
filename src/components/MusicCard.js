@@ -1,5 +1,5 @@
 import "font-awesome/css/font-awesome.css";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "../css/musiccard.css";
 import React from "react";
 import "react-dom";
@@ -57,6 +57,11 @@ const MusicCard = ({
     else if (mode === "loop") setMode("no-repeat");
     else setMode("repeat");
   };
+
+  useEffect(() => {
+    if (isPlaying) audioRef.current.play();
+    else audioRef.current.pause();
+  }, [isPlaying]);
 
   if (audioRef.current || (false && isPlaying)) {
     if (isPlaying) audioRef.current.play();
