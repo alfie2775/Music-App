@@ -13,6 +13,8 @@ const Library = (props) => {
             song={song}
             currentSongIndex={props.currentSongIndex}
             selectSong={props.selectSong}
+            isPlaying={props.isPlaying}
+            setIsPlaying={props.setIsPlaying}
           />
         ))}
       </div>

@@ -6,6 +6,7 @@
 .pnp.js
 # testing
 /coverage
+music
 
 # production
 /build

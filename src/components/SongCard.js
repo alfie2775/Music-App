@@ -7,7 +7,10 @@ const SongCard = (props) => {
         "row library-row " +
         (props.idx === props.currentSongIndex ? "selected-song" : "")
       }
-      onClick={() => props.selectSong(props.idx)}
+      onClick={() => {
+        if (!props.IsPlaying) props.setIsPlaying(true);
+        props.selectSong(props.idx);
+      }}
     >
       <div className="col-2">
         <img

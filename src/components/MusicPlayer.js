@@ -13,6 +13,7 @@ const MusicPlayer = () => {
   const slider = useRef(null);
   const mc = useRef(null);
   const slider2 = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const openLibrary = () => {
     slider.current.classList.toggle("slide");
@@ -36,6 +37,8 @@ const MusicPlayer = () => {
             mode={mode}
             setMode={setMode}
             song={songs[currentSongIndex]}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
             nextSong={() =>
               setcurrentSongIndex((currentSongIndex + 1) % songs.length)
             }
@@ -58,6 +61,8 @@ const MusicPlayer = () => {
             songs={songs}
             selectSong={selectSong}
             currentSongIndex={currentSongIndex}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
           />
         </div>
       </div>

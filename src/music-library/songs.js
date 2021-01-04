@@ -1,83 +1,65 @@
-import BlindingLights from "./songs/BlindingLights.mp3";
-import ImgBlindingLights from "./images/BlindingLights.jpg";
-import Starboy from "./songs/Starboy.mp3";
-import ImgStarboy from "./images/Starboy.jpg";
-import Badguy from "./songs/BadGuy.mp3";
-import ImgBadguy from "./images/BadGuy.jpg";
-import Afterglow from "./songs/Afterglow.mp3";
-import ImgAfterglow from "./images/Afterglow.jpg";
-import DontStartNow from "./songs/DontStartNow.mp3";
-import ImgDontStartNow from "./images/DontStartNow.jpg";
-import WeDontTalkAnymore from "./songs/WeDontTalkAnymore.mp3";
-import ImgWeDontTalkAnymore from "./images/WeDontTalkAnymore.jpg";
-import Memories from "./songs/Memories.mp3";
-import ImgMemories from "./images/Memories.jpg";
-import Dynamite from "./songs/Dynamite.mp3";
-import ImgDynamite from "./images/Dynamite.jpg";
-import ShapeOfYou from "./songs/ShapeOfYou.mp3";
-import ImgShapeOfYou from "./images/ShapeOfYou.jpg";
-import Despacito from "./songs/Despacito.mp3";
-import ImgDespacito from "./images/Despacito.jpg";
+const songUrl = "/music-library/songs/";
+const imageUrl = "/music-library/images/";
 
 export const SONGS = [
   {
     name: "Blinding Lights",
-    img: ImgBlindingLights,
-    src: BlindingLights,
+    img: imageUrl + "BlindingLights" + ".jpg",
+    src: songUrl + "BlindingLights" + ".mp3",
     singer: "Weeknd",
   },
   {
     name: "Despacito",
-    img: ImgDespacito,
-    src: Despacito,
+    img: imageUrl + "Despacito" + ".jpg",
+    src: songUrl + "Despacito" + ".mp3",
     singer: "Luis Fonsi",
   },
   {
     name: "Memories",
-    img: ImgMemories,
-    src: Memories,
+    img: imageUrl + "Memories" + ".jpg",
+    src: songUrl + "Memories" + ".mp3",
     singer: "Maroon 5",
   },
   {
     name: "Bad Guy",
-    img: ImgBadguy,
-    src: Badguy,
+    img: imageUrl + "Badguy" + ".jpg",
+    src: songUrl + "Badguy" + ".mp3",
     singer: "Billie Eilish",
   },
   {
     name: "Starboy",
-    img: ImgStarboy,
-    src: Starboy,
+    img: imageUrl + "Starboy" + ".jpg",
+    src: songUrl + "Starboy" + ".mp3",
     singer: "Weeknd",
   },
   {
     name: "Afterglow",
-    img: ImgAfterglow,
-    src: Afterglow,
+    img: imageUrl + "Afterglow" + ".jpg",
+    src: songUrl + "Afterglow.mp3",
     singer: "Ed Sheeran",
   },
   {
     name: "Don't Start Now",
-    img: ImgDontStartNow,
-    src: DontStartNow,
+    img: imageUrl + "DontStartNow" + ".jpg",
+    src: songUrl + "DontStartNow.mp3",
     singer: "Dua Lipa",
   },
   {
-    name: "Dynamite",
-    img: ImgDynamite,
-    src: Dynamite,
-    singer: "BTS",
+    name: "Aftershock (Remix)",
+    img: imageUrl + "Aftershock" + ".jpg",
+    src: songUrl + "Aftershock.mp3",
+    singer: "Cash Cash",
   },
   {
     name: "We Don't Talk Anymore",
-    img: ImgWeDontTalkAnymore,
-    src: WeDontTalkAnymore,
+    img: imageUrl + "WeDontTalkAnymore" + ".jpg",
+    src: songUrl + "WeDontTalkAnymore.mp3",
     singer: "Selena Gomez",
   },
   {
     name: "Shape Of You",
-    img: ImgShapeOfYou,
-    src: ShapeOfYou,
+    img: imageUrl + "ShapeOfYou.jpg",
+    src: songUrl + "ShapeOfYou.mp3",
     singer: "Ed Sheeran",
   },
 ];

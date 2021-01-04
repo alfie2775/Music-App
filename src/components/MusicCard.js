@@ -5,11 +5,18 @@ import React from "react";
 import "react-dom";
 import ReactTooltip from "react-tooltip";
 
-const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
+const MusicCard = ({
+  song,
+  nextSong,
+  prevSong,
+  mode,
+  setMode,
+  isPlaying,
+  setIsPlaying,
+}) => {
   const audioRef = useRef(null);
   const timeRef = useRef(null);
   const pp = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [songTime, setSongTime] = useState(0);
   const [autoPlay, setAutoPlay] = useState(false);
   const [volume, setVolume] = useState(1);
@@ -51,10 +58,10 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
     else setMode("repeat");
   };
 
-  useEffect(() => {
+  if (audioRef.current || (false && isPlaying)) {
     if (isPlaying) audioRef.current.play();
     else audioRef.current.pause();
-  }, [isPlaying]);
+  }
 
   return (
     <div className="row justify-content-center" style={{ height: "100%" }}>
@@ -70,6 +77,7 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
             onTimeUpdate={() => setSongTime(audioRef.current.currentTime)}
             src={song.src}
             ref={audioRef}
+            preload="auto"
           ></audio>
           <div className="time-stamps">
             <span className="col-2 timestamp">
@@ -107,7 +115,13 @@ const MusicCard = ({ song, nextSong, prevSong, mode, setMode }) => {
           <div className="controls mt-2 mb-1">
             <div className="row justify-content-center mb-2">
               <div className="col-7">
-                <button className="btn" onClick={() => changeSong(prevSong)}>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    if (songTime <= 3) changeSong(prevSong);
+                    else audioRef.current.currentTime = 0;
+                  }}
+                >
                   <span className="fa fa-step-backward"></span>
                 </button>
                 <button className="btn btn-success pp" onClick={handlePP}>

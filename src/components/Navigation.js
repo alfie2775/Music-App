@@ -4,7 +4,9 @@ const Navigation = ({ openLibrary }) => {
     <div className="navibar container">
       <div className="row">
         <div className="col-6">
-          <p className="brand mt-2">MUSIC PLAYER</p>
+          <a style={{ textDecoration: "none", color: "white" }} href="/">
+            <p className="brand mt-2">MUSIC PLAYER</p>
+          </a>
         </div>
         <div className="col-6 d-flex justify-content-center">
           <div>

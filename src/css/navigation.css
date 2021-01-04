@@ -5,7 +5,8 @@
   font-size: 1.8rem;
 }
 
-button.btn:hover {
+button.btn:hover,
+.brand:hover {
   color: lightgrey !important;
 }
 @media (max-width: 913px) {
