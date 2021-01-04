@@ -53,6 +53,7 @@ const MusicPlayer = () => {
               Made by{" "}
               <a
                 target="_blank"
+                rel="noreferrer"
                 className="link-to-alfie"
                 href="https://tarunalfie.netlify.app"
               >
