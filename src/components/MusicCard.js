@@ -1,5 +1,5 @@
 import "font-awesome/css/font-awesome.css";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import "../css/musiccard.css";
 import React from "react";
 import "react-dom";
