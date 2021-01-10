@@ -53,9 +53,9 @@ const MusicCard = ({
   };
 
   const changeMode = () => {
-    if (mode === "repeat") setMode("loop");
-    else if (mode === "loop") setMode("no-repeat");
-    else setMode("repeat");
+    if (mode === "loop") setMode("repeat");
+    else if (mode === "repeat") setMode("no-repeat");
+    else setMode("loop");
   };
 
   useEffect(() => {
@@ -74,19 +74,23 @@ const MusicCard = ({
         <h5 className="card-title text-center mt-3">{song.name}</h5>
         <img src={song.img} alt={song.name} className="card-img" />
         <h6 className="card-title text-center mt-3">{song.singer}</h6>
-        <div className="card-body justify-content-center">
+        <div className="card-body">
           <audio
             autoPlay={autoPlay}
             onEnded={handleEnd}
-            loop={mode === "loop" ? true : false}
+            loop={mode === "repeat" ? true : false}
             onTimeUpdate={() => setSongTime(audioRef.current.currentTime)}
             src={song.src}
             ref={audioRef}
             preload="auto"
+            onLoadedData={() => {
+              if (isPlaying) audioRef.current.play();
+              else audioRef.current.pause();
+            }}
           ></audio>
-          <div className="time-stamps">
-            <span className="col-2 timestamp">
-              {songTime === 0 ? "00:00" : sToM(songTime)}
+          <div className="time-stamps row">
+            <span className="timestamp ml-auto">
+              <span>{songTime === 0 ? "00:00" : sToM(songTime)}</span>
             </span>
             <span className="col-8">
               <input
@@ -94,7 +98,6 @@ const MusicCard = ({
                 ref={timeRef}
                 onInput={(e) => {
                   audioRef.current.currentTime = e.target.value;
-                  console.log(e.target.value);
                 }}
                 type="range"
                 min={0}
@@ -109,7 +112,7 @@ const MusicCard = ({
                 step="any"
               />
             </span>
-            <span className="col-2 timestamp">
+            <span className=" timestamp mr-auto">
               {audioRef.current
                 ? isNaN(audioRef.current.duration)
                   ? "00:00"
@@ -119,7 +122,7 @@ const MusicCard = ({
           </div>
           <div className="controls mt-2 mb-1">
             <div className="row justify-content-center mb-2">
-              <div className="col-7">
+              <div className="col-md-12 col-12">
                 <button
                   className="btn"
                   onClick={() => {
@@ -136,21 +139,39 @@ const MusicCard = ({
                   ></span>
                 </button>
 
-                <button
-                  className="btn btn"
-                  onClick={() => changeSong(nextSong)}
-                >
+                <button className="btn" onClick={() => changeSong(nextSong)}>
                   <span className="fa fa-step-forward"></span>
                 </button>
               </div>
             </div>
           </div>
           <div className="row justify-content-center">
-            <div className="col-7 d-flex">
-              <button className="btn">
-                <a href={song.src} download={song.name}>
-                  <span className="fa fa-download"></span>
-                </a>
+            <div className="col-12 last-row">
+              <button
+                className="btn"
+                onClick={changeMode}
+                data-tip
+                data-for="mode"
+              >
+                <span
+                  style={{
+                    transform: "scaleX(-1) rotate(-50deg)",
+                    color: mode === "no-repeat" ? "grey" : "green",
+                  }}
+                  className={
+                    "fa fa-undo " + (mode === "no-repeat" ? "grey-" : "green-")
+                  }
+                ></span>
+                <sub
+                  style={{
+                    color: "lightgreen",
+                    fontWeight: "bold",
+                    opacity: mode === "repeat" ? 1 : 0,
+                    marginLeft: "5px",
+                  }}
+                >
+                  1
+                </sub>
               </button>
 
               <div className="drop-down" data-tip data-for="volume">
@@ -174,25 +195,13 @@ const MusicCard = ({
                   onInput={(e) => handleVolume(e)}
                 />
               </div>
-              <button
-                className="btn"
-                onClick={changeMode}
-                data-tip
-                data-for="mode"
-              >
-                <span
-                  style={{
-                    transform: "scaleX(-1) rotate(-30deg)",
-                    color: mode === "no-repeat" ? "grey" : "green",
-                  }}
-                  className={
-                    "fa fa-undo " + (mode === "no-repeat" ? "grey-" : "green-")
-                  }
-                ></span>
-                <sub style={{ color: "lightgreen", fontWeight: "bold" }}>
-                  {mode === "loop" ? " 1" : ""}
-                </sub>
+
+              <button className="btn">
+                <a href={song.src} download={song.name}>
+                  <span className="fa fa-download"></span>
+                </a>
               </button>
+
               <ReactTooltip effect="solid" id="mode" place="bottom">
                 <span style={{ textTransform: "capitalize" }}>
                   {"on " + mode}

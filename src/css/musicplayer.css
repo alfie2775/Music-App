@@ -1,6 +1,6 @@
 body {
   background: linear-gradient(#1f1c2c, #928dab);
-  height: 100vh;
+  min-height: 100vh;
   color: white;
 }
 .alfie {
@@ -9,7 +9,7 @@ body {
 }
 #slider {
   width: 200vw;
-  height: 80vh;
+  min-height: 80vh;
 }
 .link-to-alfie {
   border: 0.01rem solid rgb(175, 175, 175);
@@ -26,8 +26,10 @@ body {
 }
 .mc {
   width: 100vw;
-  height: 80vh;
+  min-height: 80vh;
   float: left;
+  display: flex;
+  flex-direction: column;
 }
 .lib {
   width: 100vw;

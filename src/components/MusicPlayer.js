@@ -9,7 +9,7 @@ import "../css/musicplayer.css";
 const MusicPlayer = () => {
   const [songs] = useState(SONGS);
   const [currentSongIndex, setcurrentSongIndex] = useState(0);
-  const [mode, setMode] = useState("repeat");
+  const [mode, setMode] = useState("loop");
   const slider = useRef(null);
   const mc = useRef(null);
   const slider2 = useRef(null);
@@ -33,21 +33,23 @@ const MusicPlayer = () => {
       </div>
       <div id="slider" className="slide-" ref={slider}>
         <div className="mc" ref={mc}>
-          <MusicCard
-            mode={mode}
-            setMode={setMode}
-            song={songs[currentSongIndex]}
-            isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
-            nextSong={() =>
-              setcurrentSongIndex((currentSongIndex + 1) % songs.length)
-            }
-            prevSong={() => {
-              var x = currentSongIndex - 1;
-              if (x === -1) x = songs.length - 1;
-              setcurrentSongIndex(x);
-            }}
-          />
+          <div>
+            <MusicCard
+              mode={mode}
+              setMode={setMode}
+              song={songs[currentSongIndex]}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+              nextSong={() =>
+                setcurrentSongIndex((currentSongIndex + 1) % songs.length)
+              }
+              prevSong={() => {
+                var x = currentSongIndex - 1;
+                if (x === -1) x = songs.length - 1;
+                setcurrentSongIndex(x);
+              }}
+            />
+          </div>
           <div className="alfie">
             <p>
               Made by{" "}
