@@ -68,7 +68,9 @@ body {
     height: 76vh;
   }
 }
-button.btn:hover:not(:focus),
-.fa:hover:not(:focus) {
-  color: darkgrey !important;
+@media (min-width: 913px) {
+  button.btn:hover,
+  .fa:hover {
+    color: darkgrey !important;
+  }
 }

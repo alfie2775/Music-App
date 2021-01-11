@@ -34,6 +34,7 @@ const MusicCard = ({
 
   const changeSong = (func) => {
     func();
+    audioRef.current.load();
   };
 
   const handleEnd = () => {
@@ -71,8 +72,6 @@ const MusicCard = ({
           <audio
             autoPlay={autoPlay}
             onEnded={handleEnd}
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
             loop={mode === "repeat" ? true : false}
             onTimeUpdate={() => setSongTime(audioRef.current.currentTime)}
             src={song.src}
