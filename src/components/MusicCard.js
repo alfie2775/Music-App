@@ -34,7 +34,6 @@ const MusicCard = ({
 
   const changeSong = (func) => {
     func();
-    audioRef.current.load();
   };
 
   const handleEnd = () => {
@@ -61,15 +60,6 @@ const MusicCard = ({
     if (isPlaying) audioRef.current.play();
     else audioRef.current.pause();
   }, [isPlaying]);
-
-  useEffect(() => {
-    if (audioRef.current) audioRef.current.load();
-  }, [audioRef]);
-
-  if (audioRef.current || (false && isPlaying)) {
-    if (isPlaying) audioRef.current.play();
-    else audioRef.current.pause();
-  }
 
   return (
     <div className="row justify-content-center" style={{ height: "100%" }}>
