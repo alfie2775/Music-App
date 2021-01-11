@@ -34,13 +34,12 @@ const MusicCard = ({
 
   const changeSong = (func) => {
     func();
+    audioRef.current.load();
   };
 
   const handleEnd = () => {
-    console.log(isPlaying);
-    if (mode === "repeat") changeSong(nextSong);
+    if (mode === "loop") changeSong(nextSong);
     else if (mode === "no-repeat") setIsPlaying(false);
-    console.log(isPlaying);
   };
 
   const sToM = (n) => {
@@ -63,6 +62,10 @@ const MusicCard = ({
     else audioRef.current.pause();
   }, [isPlaying]);
 
+  useEffect(() => {
+    if (audioRef.current) audioRef.current.load();
+  }, [audioRef.current.currentSrc]);
+
   if (audioRef.current || (false && isPlaying)) {
     if (isPlaying) audioRef.current.play();
     else audioRef.current.pause();
@@ -78,6 +81,8 @@ const MusicCard = ({
           <audio
             autoPlay={autoPlay}
             onEnded={handleEnd}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
             loop={mode === "repeat" ? true : false}
             onTimeUpdate={() => setSongTime(audioRef.current.currentTime)}
             src={song.src}

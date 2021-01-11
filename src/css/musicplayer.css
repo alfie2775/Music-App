@@ -21,6 +21,7 @@ body {
 }
 .link-to-alfie:hover,
 .link-to-alfie:active {
+  transition: all 0.2s ease-in-out;
   text-decoration: none;
   color: orange;
 }
@@ -67,7 +68,7 @@ body {
     height: 76vh;
   }
 }
-button.btn:hover,
-.fa:hover {
+button.btn:hover:not(:focus),
+.fa:hover:not(:focus) {
   color: darkgrey !important;
 }
