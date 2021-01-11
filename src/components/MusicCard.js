@@ -64,7 +64,7 @@ const MusicCard = ({
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.load();
-  }, [audioRef.current.currentSrc]);
+  }, [audioRef]);
 
   if (audioRef.current || (false && isPlaying)) {
     if (isPlaying) audioRef.current.play();
